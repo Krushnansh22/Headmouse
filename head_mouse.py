@@ -32,6 +32,12 @@ except ImportError as e:
 class Config:
     """Configuration for virtual mouse behavior - CALIBRATED VALUES"""
     
+    # PIP window geometry
+    pip_width: int = 320
+    pip_height: int = 240
+    pip_x: int = 1580  # Bottom-right positioning like hand_mouse
+    pip_y: int = 780
+    pip_alpha: float = 0.5
     
     # CALIBRATED THRESHOLDS - Based on your facial measurements
     
@@ -925,10 +931,10 @@ class VirtualMouse:
             print("🎯 MODE: ABSOLUTE (Iris position-based)")
             print("👄 OPEN MOUTH:          Move cursor (clicks blocked)")
             print("👄 CLOSE MOUTH:         Lock cursor at current position")
-        print("👁️  Blink both eyes:     Toggle scroll mode (when mouth closed)")
+        print("👁  Blink both eyes:     Toggle scroll mode (when mouth closed)")
         print("😉 Wink left/right:     Click (when mouth closed)")
         print()
-        print("⌨️  Keyboard shortcuts:")
+        print("⌨  Keyboard shortcuts:")
         print("   ESC/Q - Exit program")
         print("   R     - Toggle between Relative/Absolute mode")
         print("   D     - Toggle debug values")
@@ -960,10 +966,12 @@ class VirtualMouse:
             pip_label = tk.Label(pip_window)
             pip_label.pack()
             
-            print(f"🖼️ Running in PIP mode (bottom-right corner)")
+
+            print(f"🖼 Running in PIP mode (bottom-right corner)")
             
         except Exception as e:
-            print(f"⚠️ Could not create PIP window: {e}")
+            print(f"⚠ Could not create PIP window: {e}")
+
             print("   Falling back to OpenCV window")
             pip_mode = False
         
@@ -979,7 +987,7 @@ class VirtualMouse:
                     success, frame = cap.read()
                     
                     if not success:
-                        print("⚠️  Warning: Empty camera frame")
+                        print("⚠  Warning: Empty camera frame")
                         continue
                     
                     # Flip for mirror effect
@@ -1012,7 +1020,8 @@ class VirtualMouse:
                             if self.is_moving:
                                 moved = self.nose_controller.move_cursor(landmarks)
                                 if not was_moving:
-                                    print("🖱️ Relative movement: ACTIVE")
+                                    print("🖱 Relative movement: ACTIVE")
+
                             else:
                                 self.nose_controller.update_reference_position(landmarks)
                                 if was_moving:
@@ -1026,7 +1035,7 @@ class VirtualMouse:
                                 self.last_cursor_pos = (cursor_x, cursor_y)
                                 if not was_moving:
                                     self.cursor_filter.reset()
-                                    print("🖱️ Cursor movement: ACTIVE")
+                                    print("🖱 Cursor movement: ACTIVE")
                             else:
                                 if was_moving:
                                     print("🔒 Cursor locked at position")
@@ -1042,7 +1051,7 @@ class VirtualMouse:
                             if wink:
                                 button = 'left' if wink == 'left' else 'right'
                                 pag.click(button=button)
-                                print(f"🖱️ {button.capitalize()} click")
+                                print(f"🖱 {button.capitalize()} click")
                         
                         # Draw visualizations
                         self.draw_visualizations(frame, face_landmarks, 
@@ -1081,11 +1090,11 @@ class VirtualMouse:
                             pip_window.update()
                         except tk.TclError:
                             # PIP window was closed
-                            print("🖼️ PIP window closed")
+                            print("🖼 PIP window closed")
                             running = False
                             break
                         except Exception as e:
-                            print(f"⚠️ PIP update error: {e}")
+                            print(f"⚠ PIP update error: {e}")
                             # Continue running even if PIP fails
                             pass
                     else:
@@ -1124,7 +1133,8 @@ class VirtualMouse:
                         print(f"Nose circle: {'ON' if self.config.show_nose_circle else 'OFF'}")
             
             except KeyboardInterrupt:
-                print("\n⚠️ Interrupted by user")
+                print("\n⚠ Interrupted by user")
+
             except pag.FailSafeException:
                 print("\n🛑 PyAutoGUI failsafe triggered (mouse in corner)")
             except Exception as e:
