@@ -34,15 +34,27 @@ class VirtualMouseGUI:
         self.root.title("Virtual Mouse - HCI Interface")
         self.root.geometry("1200x700+150+30")
         self.root.resizable(False, False)
+        photo = tk.PhotoImage(file="logo.png") 
+        self.root.iconphoto(True, photo) 
+        
+        # Set new color scheme
+        self.bg_primary    = "#2F3033"   
+        self.bg_secondary  = "#26272A"   
+        self.accent_color  = "#143A6F"   
+        self.highlight_color = "#E54861" 
+        self.button_color  = "#57D98A"   
+        self.text_color    = "#E6E6E6"   
+        self.info_color    = "#4A8CF0" 
         
         # Set color scheme
-        self.bg_primary = "#252528"
-        self.bg_secondary = "#2b2b30"
-        self.accent_color = "#0f3460"
-        self.highlight_color = "#bb6d7a"
-        self.button_color = "#5be480"
-        self.text_color = "#eaeaea"
-        self.info_color = "#3b82f6"
+        # self.bg_primary = "#363638"
+        # self.bg_secondary = "#2E2E2E"
+        # self.accent_color = "#0f3460"
+        # self.highlight_color = "#e93654"
+        # self.button_color = "#5be480"
+        # self.text_color = "#eaeaea"
+        # self.info_color = "#3b82f6"
+        self.hover_colour = "#5be480"
         
         self.root.configure(bg=self.bg_primary)
         
@@ -340,7 +352,7 @@ class VirtualMouseGUI:
         title_label = tk.Label(
             header_frame,
             text="Virtual Mouse",
-            font=("Segoe UI", 42, "bold"),
+            font=("Montserrat", 42, "bold"),
             bg=self.bg_primary,
             fg=self.highlight_color
         )
@@ -371,13 +383,13 @@ class VirtualMouseGUI:
         desc_text = (
             "Choose your preferred control method:\n\n"
             "• Hand Mouse - Control your cursor using hand gestures\n"
-            "• Head Mouse - Control your cursor using head and facial movements"
+            "• Head Mouse - Control your cursor using head and Eye movements"
         )
         
         desc_label = tk.Label(
             desc_frame,
             text=desc_text,
-            font=("Segoe UI", 11),
+            font=("Times", 12),
             bg=self.bg_secondary,
             fg=self.text_color,
             justify=tk.LEFT,
@@ -418,9 +430,9 @@ class VirtualMouseGUI:
         
         # Footer
         footer_frame = tk.Frame(main_frame, bg=self.bg_primary)
-        footer_frame.pack(fill=tk.X, pady=(20, 0))
+        footer_frame.pack(fill=tk.X, pady=(10, 0))
         
-        footer_text = "Press ESC or 'Q' in the camera window to exit • Ensure your camera is connected"
+        footer_text = "copyright @Engineering Design and Innovation - III"
         footer_label = tk.Label(
             footer_frame,
             text=footer_text,
@@ -529,7 +541,7 @@ class VirtualMouseGUI:
     
     def on_hover_enter(self, widget):
         """Handle mouse hover enter"""
-        widget.configure(highlightbackground=self.highlight_color, highlightthickness=3)
+        widget.configure(highlightbackground=self.hover_colour, highlightthickness=3)
     
     def on_hover_leave(self, widget):
         """Handle mouse hover leave"""

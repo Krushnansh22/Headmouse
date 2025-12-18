@@ -607,15 +607,11 @@ class VirtualMouse:
                 pyautogui.press('volumeup')
                 pyautogui.press('volumeup')
                 pyautogui.press('volumeup')
-                pyautogui.press('volumeup')
-                pyautogui.press('volumeup')
                 print("🔊 Volume Up")
             return "Vol Up"
         
         elif gesture == Gesture.THUMB_PINKY_BOTTOM:
             if is_new and self.gesture_detector.can_perform_action(gesture):
-                pyautogui.press('volumedown')
-                pyautogui.press('volumedown')
                 pyautogui.press('volumedown')
                 pyautogui.press('volumedown')
                 pyautogui.press('volumedown')
