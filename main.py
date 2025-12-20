@@ -36,6 +36,7 @@ class VirtualMouseGUI:
         self.root.resizable(False, False)
         photo = tk.PhotoImage(file="logo.png") 
         self.root.iconphoto(True, photo) 
+
         
         # Set new color scheme
         self.bg_primary    = "#2F3033"   
@@ -626,7 +627,6 @@ def main():
     root = tk.Tk()
     app = VirtualMouseGUI(root)
     root.mainloop()
-
-
+    
 if __name__ == "__main__":
     main()

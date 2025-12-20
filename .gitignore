@@ -6,4 +6,10 @@ env
 .vscode
 /.vscode
 .idea
+
 /.idea
+./dist
+/dist
+/build
+./build
+Virtual-Mouse.spec

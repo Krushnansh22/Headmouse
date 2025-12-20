@@ -58,6 +58,7 @@ class Config:
     use_relative_movement: bool = True  # Toggle between relative/absolute
     nose_dead_zone_radius: float = 0.003  # No movement within this radius (normalized)
     nose_control_radius: float = 0.04 # Maximum detection radius (normalized)
+
     nose_speed_multiplier: float = 300.0  # Cursor pixels per second per unit displacement
     nose_speed_curve: str = "exponential"  # "linear", "exponential", "squared"
     nose_max_speed: float = 3000000.0  # Maximum cursor speed (pixels per second)
@@ -88,6 +89,7 @@ class Config:
     pip_x: int = 1580  # Bottom-right positioning like hand_mouse
     pip_y: int = 780
     pip_alpha: float = 0.5 
+
     
     def save(self, path: str = "mouse_config.json"):
         """Save configuration to file"""
@@ -961,12 +963,35 @@ class VirtualMouse:
             pip_window.attributes('-topmost', True)
             pip_window.attributes('-alpha', self.config.pip_alpha)
             pip_window.resizable(False, False)
+
             pip_window.overrideredirect(True)  # Remove window decorations
             
             pip_label = tk.Label(pip_window)
             pip_label.pack()
             
 
+            close_btn = tk.Button(
+            pip_window,
+            text="✕",
+            font=("Arial", 12, "bold"),
+            bg="#ff4444",
+            fg="white",
+            # command=lambda: self.close_application(pip_window, cap),
+            cursor="hand2",
+            relief=tk.FLAT,
+            width=2,
+            height=1
+            )
+            close_btn.place(relx=0.92, rely=0.02)  # Top-right corner
+            
+            def closeApp(event):
+                pip_window.destroy()
+                
+            # Add hover effects
+            close_btn.bind("<Enter>", lambda e: close_btn.config(bg="#ff6666"))
+            close_btn.bind("<Leave>", lambda e: close_btn.config(bg="#ff4444"))
+            close_btn.bind("<Button-1>", closeApp)
+            
             print(f"🖼 Running in PIP mode (bottom-right corner)")
             
         except Exception as e:

@@ -728,6 +728,29 @@ class VirtualMouse:
         pip_label = tk.Label(pip_window)
         pip_label.pack()
         
+
+        close_btn = tk.Button(
+        pip_window,
+        text="✕",
+        font=("Arial", 12, "bold"),
+        bg="#ff4444",
+        fg="white",
+        # command=lambda: self.close_application(pip_window, cap),
+        cursor="hand2",
+        relief=tk.FLAT,
+        width=2,
+        height=1
+        )
+        close_btn.place(relx=0.92, rely=0.02)  # Top-right corner
+        
+        def closeApp(event):
+            pip_window.destroy()
+            
+        # Add hover effects
+        close_btn.bind("<Enter>", lambda e: close_btn.config(bg="#ff6666"))
+        close_btn.bind("<Leave>", lambda e: close_btn.config(bg="#ff4444"))
+        close_btn.bind("<Button-1>", closeApp)
+        
         print("📼️ Running in PIP mode")
         
         try:
