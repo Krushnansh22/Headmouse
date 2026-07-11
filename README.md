@@ -174,7 +174,7 @@ The generated executable is available inside the `dist/` directory after build.
 
 
 
-## How It Works (Conceptual)
+## How It Works 
 
 * Webcam feed is processed in real time
 * MediaPipe extracts hand or facial landmarks
@@ -192,7 +192,12 @@ The generated executable is available inside the `dist/` directory after build.
 * HCI research & academic projects
 
 ---
+## Contributors
 
+- [Atharv Rahate](https://github.com/atharvrahate296)
+- [Rohan Kokatre](https://github.com/rohan1252030019-netizen)
+- [Krushnansh Meher](https://github.com/Krushnansh22)
+---
 ## Support
 
 If you face any issues during setup or execution, please raise an issue or contact the project maintainer.
